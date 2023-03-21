@@ -1,0 +1,197 @@
+[
+  {
+    "messageText": "1234",
+    "receiver": {
+      "id": "bb0bfc56-621d-4a7f-bfec-e23a9a3c0346",
+      "username": "yellow lion",
+      "img": "avatar1",
+      "online": false
+    },
+    "sender": {
+      "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+      "username": "gray_lion",
+      "img": "avatar2",
+      "online": true
+    }
+  },
+  {
+    "messageText": "sadfasd",
+    "receiver": {
+      "id": "bb0bfc56-621d-4a7f-bfec-e23a9a3c0346",
+      "username": "yellow lion",
+      "img": "avatar1",
+      "online": false
+    },
+    "sender": {
+      "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+      "username": "gray_lion",
+      "img": "avatar2",
+      "online": true
+    }
+  },
+  {
+    "messageText": "3234",
+    "receiver": {
+      "id": "bb0bfc56-621d-4a7f-bfec-e23a9a3c0346",
+      "username": "yellow lion",
+      "img": "avatar1",
+      "online": false
+    },
+    "sender": {
+      "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+      "username": "gray_lion",
+      "img": "avatar2",
+      "online": true
+    }
+  },
+  {
+    "messageText": "rtyur",
+    "receiver": {
+      "id": "bb0bfc56-621d-4a7f-bfec-e23a9a3c0346",
+      "username": "yellow lion",
+      "img": "avatar1",
+      "online": false
+    },
+    "sender": {
+      "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+      "username": "gray_lion",
+      "img": "avatar2",
+      "online": true
+    }
+  },
+  {
+    "messageText": "yuiytyui",
+    "receiver": {
+      "id": "bb0bfc56-621d-4a7f-bfec-e23a9a3c0346",
+      "username": "yellow lion",
+      "img": "avatar1",
+      "online": false
+    },
+    "sender": {
+      "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+      "username": "gray_lion",
+      "img": "avatar2",
+      "online": true
+    }
+  },
+  {
+    "messageText": "nmmmmm",
+    "receiver": {
+      "id": "bb0bfc56-621d-4a7f-bfec-e23a9a3c0346",
+      "username": "yellow lion",
+      "img": "avatar1",
+      "online": false
+    },
+    "sender": {
+      "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+      "username": "gray_lion",
+      "img": "avatar2",
+      "online": true
+    }
+  },
+  {
+    "messageText": "cvcvcv",
+    "receiver": {
+      "id": "bb0bfc56-621d-4a7f-bfec-e23a9a3c0346",
+      "username": "yellow lion",
+      "img": "avatar1",
+      "online": false
+    },
+    "sender": {
+      "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+      "username": "gray_lion",
+      "img": "avatar2",
+      "online": true
+    }
+  },
+  {
+    "messageText": "78969",
+    "receiver": {
+      "id": "bb0bfc56-621d-4a7f-bfec-e23a9a3c0346",
+      "username": "yellow lion",
+      "img": "avatar1",
+      "online": false
+    },
+    "sender": {
+      "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+      "username": "gray_lion",
+      "img": "avatar2",
+      "online": true
+    }
+  },
+  {
+    "messageText": "Hello",
+    "receiver": {
+      "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+      "username": "gray_lion",
+      "img": "avatar2",
+      "online": false
+    },
+    "sender": {
+      "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+      "username": "gray_lion",
+      "img": "avatar2",
+      "online": true
+    }
+  },
+  {
+    "messageText": "123",
+    "receiver": {
+      "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+      "username": "gray_lion",
+      "img": "avatar2",
+      "online": false
+    },
+    "sender": {
+      "id": "95868af0-5a9f-4351-9529-c3cb64779837",
+      "username": "red_bird",
+      "img": "avatar1",
+      "online": true
+    }
+  },
+  {
+    "messageText": "12345",
+    "receiver": {
+      "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+      "username": "gray_lion",
+      "img": "avatar2",
+      "online": false
+    },
+    "sender": {
+      "id": "95868af0-5a9f-4351-9529-c3cb64779837",
+      "username": "red_bird",
+      "img": "avatar1",
+      "online": true
+    }
+  },
+  {
+    "messageText": "Ku",
+    "receiver": {
+      "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+      "username": "gray_lion",
+      "img": "avatar2",
+      "online": false
+    },
+    "sender": {
+      "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+      "username": "gray_lion",
+      "img": "avatar2",
+      "online": true
+    }
+  },
+  {
+    "messageText": "sdfgsdgfsdfg",
+    "receiver": {
+      "id": "bb0bfc56-621d-4a7f-bfec-e23a9a3c0346",
+      "username": "yellow lion",
+      "img": "avatar1",
+      "online": false
+    },
+    "sender": {
+      "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+      "username": "gray_lion",
+      "img": "avatar2",
+      "online": true
+    }
+  }
+]
