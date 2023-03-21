@@ -10,7 +10,7 @@ const Chat = (props) => {
         })
     }, [props.socket])
 
-    useEffect(()=>{
+    useEffect(() => {
         props.socket.on('message:loaded', (messages) => {
             setMessages(messages)
         })
@@ -20,6 +20,7 @@ const Chat = (props) => {
     const [messages, setMessages] = useState('')
     const [message, setMessage] = useState('')
     const [users, setUsers] = useState(props.user)
+    const [searchValue, setSearchInput] = useState('')
 
     console.log("Printing messages")
     console.log(messages)
@@ -28,6 +29,11 @@ const Chat = (props) => {
         if (data.trim().length > 0)
             props.socket.emit('message:send', {message: data.trim(), receiver: activeReceiver})
         setMessage('')
+    }
+
+    const searchItems = (searchValue) => {
+        setSearchInput(searchValue)
+        setUsers(users.filter(item => Object.values(item).join('').toLowerCase().includes(searchValue)))
     }
 
 
@@ -53,30 +59,34 @@ const Chat = (props) => {
                         </div>
                         <div className={styles.chat__field}>
                             <div className={styles.chat__messages}>
-                                {messages.length>0 && messages.map((item) => (
-                                    <div className={item.receiver.id === activeReceiver.id ? styles.chat__messageReceiver : styles.chat__messageSender}>{item.messageText}</div>
+                                {messages.length > 0 && messages.map((item) => (
+                                    <div
+                                        className={item.receiver.id === activeReceiver.id ? styles.chat__messageReceiver : styles.chat__messageSender}>{item.messageText}</div>
                                 ))
                                 }
                             </div>
                             <div className={styles.chat__inputField}>
                                 <input className={styles.chat__input} value={message}
-                                       onKeyDown={event => {if(event.key === 'Enter'){  sendMessage(message) }}}
+                                       onKeyDown={event => {
+                                           if (event.key === 'Enter') {
+                                               sendMessage(message)
+                                           }
+                                       }}
                                        onChange={event => setMessage(event.target.value)}/>
-                                <button disabled={activeReceiver === null}  onClick={() => sendMessage(message)}
+                                <button disabled={activeReceiver === null} onClick={() => sendMessage(message)}
                                         className={styles.chat__inputButton}> Send
                                 </button>
                             </div>
                         </div>
                     </div>
-                    {users.length > 1 &&
                         <div className={styles.chat__list}>
-                            {users.filter(el => el.id !== props.user.id).map((user) => (
+                            {users.length>1 && users.filter(el => el.id !== props.user.id).map((user) => (
                                 <div onClick={() => handleMessage(user)}
                                      className={activeReceiver === user ? styles.chat__listItemActive : styles.chat__listItem}
                                      key={user.id}>{user.username}</div>
                             ))}
+                            <input placeholder='Search user' className={styles.chat__searchInput} onChange={(e) => searchItems(e.target.value)}/>
                         </div>
-                    }
                 </div>
             </main>
         </div>
