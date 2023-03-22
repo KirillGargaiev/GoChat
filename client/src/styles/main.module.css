@@ -33,7 +33,8 @@
     left: 8%;
     background-color: rgb(216, 225, 232);
     height: 90%;
-    display: flex;}
+    display: flex;
+}
 
 .chat__container {
     width: 80%;
@@ -49,16 +50,47 @@
     align-items: center;
 }
 
+.chat__listOptions {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 6%;
+    background-color: darkseagreen;
+}
+
+.chat_listOptions:nth-child(1) {
+    background-color: darkorange;
+}
+
+
+.chat__listOption {
+    font-size: 20px;
+    width: 50%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    padding-top: 4%;
+    color: snow;
+}
+
+.chat__listOption:nth-child(1) {
+    border-right: 2px solid;
+}
+
+.chat__listOption:active {
+    background-color: green;
+}
+
 .chat__listItem {
     margin: 20px 0 10px 0;
     height: 5%;
     display: block;
 }
+
 .chat__listItem:hover {
     cursor: pointer;
 }
 
-.chat__listItemActive{
+.chat__listItemActive {
     margin: 20px 0 10px 0;
     height: 5%;
     width: 50%;
@@ -81,22 +113,22 @@
     height: 75%;
 }
 
-.chat__messages{
+.chat__messages {
     height: 90%;
     overflow: scroll;
 }
 
-.chat__messageSender{
+.chat__messageSender {
     width: 30%;
     font-size: 10px;
     height: 8%;
     border-radius: 12px;
     background-color: aquamarine;
     margin: 10px 0 0 0;
-    padding: 10px 5px 10px 5px;
+    padding: 15px 5px 10px 5px;
 }
 
-.chat__messageReceiver{
+.chat__messageReceiver {
     width: 30%;
     display: flex;
     margin-left: auto;
@@ -105,10 +137,10 @@
     border-radius: 12px;
     background-color: chartreuse;
     margin-top: 10px;
-    padding: 10px 5px 10px 5px;
+    padding: 15px 5px 10px 5px;
 }
 
-.chat__inputField{
+.chat__inputField {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -117,7 +149,7 @@
     margin-top: 5px;
 }
 
-.chat__input{
+.chat__input {
     width: 70%;
     overflow: auto;
     border-radius: 16px;
@@ -127,12 +159,12 @@
     padding-left: 5px;
 }
 
-.chat__inputButton{
+.chat__inputButton {
     width: 10%;
     height: 40px;
 }
 
-.chat__img{
+.chat__img {
     height: 100%;
     width: auto;
     object-fit: cover;

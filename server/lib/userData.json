@@ -1,0 +1,38 @@
+[
+  {
+    "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+    "username": "gray_lion",
+    "img": "avatar2",
+    "online": true
+  },
+  {
+    "id": "e73175ab-9f78-40c8-a8f3-d7f43218cbea",
+    "username": "yellow_tiger",
+    "img": "avatar2",
+    "online": false
+  },
+  {
+    "id": "3a6f6da9-b489-4236-92d8-1ba879f4a8d8",
+    "username": "orange_horse",
+    "img": "avatar1",
+    "online": false
+  },
+  {
+    "id": "7a0a3112-03fe-4616-911d-27f09ae7bf8f",
+    "username": "green_tiger",
+    "img": "avatar1",
+    "online": false
+  },
+  {
+    "id": "49ae6f7d-41cf-4957-8c51-06adf20c663a",
+    "username": "pink_dog",
+    "img": "avatar2",
+    "online": false
+  },
+  {
+    "id": "63558c3e-72ab-44f4-bfe9-d6ac35055e74",
+    "username": "red_fish",
+    "img": "avatar3",
+    "online": false
+  }
+]

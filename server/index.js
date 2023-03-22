@@ -14,70 +14,76 @@ const io = new Server(server, {
     }
 })
 let curUsr = {}
-const userList = [{
-    id: 'bb0bfc56-621d-4a7f-bfec-e23a9a3c0346',
-    username: "yellow lion",
-    img: 'avatar1',
-    online: false
-}, {
-    id: '4b6ee714-00ff-4ae0-be46-04f7427aea4f',
-    username: 'gray_lion',
-    img: 'avatar2',
-    online: false
-}
-]
+let userList = []
 
-function changeStatus(user) {
-    for (let el of userList) {
-        if (el.id === user.id) {
-            el.online = false
-        }
-    }
-}
 
 const onConnection = (socket) => {
     console.log('User connected')
-
     const {id} = socket.handshake.query
 
     socket.id = id
     socket.join(id)
 
-    socket.on('message:load', (receiver) => {
-        const messagesData = JSON.parse(fs.readFileSync('messageData.json', 'utf-8'))
-        const privateMessages = messagesData.filter(el => (el.sender.id === curUsr.id || el.sender.id === receiver.id)
-            && (el.receiver.id === receiver.id || el.receiver.id === curUsr.id))
-        socket.emit('message:loaded', privateMessages)
-    })
+    const onLoadMessages = (receiver) => {
+        const messagesCluster = fs.readFileSync('./lib/messageData.json', 'utf-8')
+        const messages = JSON.parse(messagesCluster)
+        const privateMessages = messages.filter(el =>
+            (el.sender.id === curUsr.id || el.sender.id === receiver.id) &&
+            (el.receiver.id === receiver.id || el.receiver.id === curUsr.id)
+        );
+        socket.emit('message:loaded', {messages:privateMessages, sender:curUsr, receiver: receiver})
+    }
+
+    const onUserConnected = (list) => {
+        socket.emit('users', list)
+        }
+
+    socket.on('message:load', onLoadMessages)
 
     socket.on('message:send', (data) => {
-        const message = {
+        const newMessage = {
             messageText: data.message,
             receiver: data.receiver,
             sender: curUsr
         }
-        const messagesData = JSON.parse(fs.readFileSync('messageData.json', 'utf-8'))
-        messagesData.push(message)
-        fs.writeFile('messageData.json', JSON.stringify(messagesData, null, 2), (err) => {
+        const messages = JSON.parse(fs.readFileSync('./lib/messageData.json', 'utf-8'))
+        messages.push(newMessage)
+        fs.writeFileSync('./lib/messageData.json', JSON.stringify(messages, null, 2), (err) => {
             if (err) throw err;
         })
-        socket.emit('message:load')
+        onLoadMessages(data.receiver)
     })
 
     socket.on('authUser', (user) => {
+        userList = JSON.parse(fs.readFileSync('./lib/userData.json', 'utf-8'))
         curUsr = user
         const isUserInList = userList.some(u => u.id === curUsr.id)
         if (!isUserInList) {
             userList.push(curUsr)
+            fs.writeFile('./lib/userData.json', JSON.stringify(userList, null, 2), err => {
+                if (err) throw err;
+            })
+        } else {
+            const index = userList.findIndex(el => el.id === curUsr.id)
+            userList[index].online = true
+            fs.writeFile('./lib/userData.json', JSON.stringify(userList, null, 2), err => {
+                if (err) throw err;
+            })
         }
         console.log(user)
-        socket.emit('users', userList)
+        onUserConnected(userList)
     })
 
 
+
     socket.on('disconnect', () => {
-        socket.emit('userUnload')
-        changeStatus(curUsr)
+        userList = JSON.parse(fs.readFileSync('./lib/userData.json', 'utf-8'))
+        const index = userList.findIndex(el => el.id === curUsr.id)
+        console.log(curUsr)
+        userList[index].online = false
+        fs.writeFile('./lib/userData.json', JSON.stringify(userList, null, 2), err => {
+            if (err) throw err;
+        })
         console.log('User disconnected')
         socket.leave(id)
     })

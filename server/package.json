@@ -17,8 +17,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js --ignore *.json",
-    "start": "node index.js"
+    "dev": "nodemon index.js",
+    "start": "node --ignore 'lib/*.json' index.js"
   },
   "keywords": [],
   "author": "",

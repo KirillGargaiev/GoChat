@@ -2,44 +2,42 @@ import React, {useEffect, useState} from 'react';
 import styles from '../styles/main.module.css'
 import images from '../images'
 
-const Chat = (props) => {
+const Chat = ({socket, user}) => {
 
-    useEffect(() => {
-        props.socket.on('users', (users) => {
-            setUsers(users)
-        })
-    }, [props.socket])
-
-    useEffect(() => {
-        props.socket.on('message:loaded', (messages) => {
-            setMessages(messages)
-        })
-    }, [props.socket])
-
+    const [currentUser, setCurrentUser] = useState(null)
     const [activeReceiver, setActiveReceiver] = useState(null)
-    const [messages, setMessages] = useState('')
+    const [messages, setMessages] = useState([])
     const [message, setMessage] = useState('')
-    const [users, setUsers] = useState(props.user)
+    const [users, setUsers] = useState(user)
+    const [filteredUsers, setFilteredUsers] = useState('')
     const [searchValue, setSearchInput] = useState('')
 
-    console.log("Printing messages")
-    console.log(messages)
+
+    useEffect(() => {
+        socket.on('users', (users) => {
+            setUsers(users)
+            setFilteredUsers(users)
+        })
+        socket.on('message:loaded', (data) => {
+            setMessages(data.messages)
+            setCurrentUser(data.sender)
+        })
+    }, [socket])
 
     function sendMessage(data) {
-        if (data.trim().length > 0)
-            props.socket.emit('message:send', {message: data.trim(), receiver: activeReceiver})
+        if (!data.trim()) return;
+        socket.emit('message:send', {message: data.trim(), receiver: activeReceiver})
         setMessage('')
     }
 
     const searchItems = (searchValue) => {
         setSearchInput(searchValue)
-        setUsers(users.filter(item => Object.values(item).join('').toLowerCase().includes(searchValue)))
+        setFilteredUsers(users.filter(item => Object.values(item).join('').toLowerCase().includes(searchValue)))
     }
-
 
     function handleMessage(user) {
         setActiveReceiver(user)
-        props.socket.emit('message:load', user)
+        socket.emit('message:load', user)
     }
 
     return (
@@ -53,13 +51,13 @@ const Chat = (props) => {
                 <div className={styles.main__content}>
                     <div className={styles.chat__container}>
                         <div className={styles.chat__info}>
-                            <img className={styles.chat__img} src={images[props.user.img]} alt="img"/>
+                            <img className={styles.chat__img} src={images[user.img]} alt="img"/>
                             <div className={styles.chat__description}>
                             </div>
                         </div>
                         <div className={styles.chat__field}>
                             <div className={styles.chat__messages}>
-                                {messages.length > 0 && messages.map((item) => (
+                                {!!messages.length && messages.map((item) => (
                                     <div
                                         className={item.receiver.id === activeReceiver.id ? styles.chat__messageReceiver : styles.chat__messageSender}>{item.messageText}</div>
                                 ))
@@ -79,14 +77,21 @@ const Chat = (props) => {
                             </div>
                         </div>
                     </div>
-                        <div className={styles.chat__list}>
-                            {users.length>1 && users.filter(el => el.id !== props.user.id).map((user) => (
-                                <div onClick={() => handleMessage(user)}
-                                     className={activeReceiver === user ? styles.chat__listItemActive : styles.chat__listItem}
-                                     key={user.id}>{user.username}</div>
-                            ))}
-                            <input placeholder='Search user' className={styles.chat__searchInput} onChange={(e) => searchItems(e.target.value)}/>
+                    <div className={styles.chat__list}>
+                        <div className={styles.chat__listOptions}>
+                            <div onClick={() => setFilteredUsers(users.filter(item => item.online))}
+                                 className={styles.chat__listOption}>Online
+                            </div>
+                            <div onClick={() => setFilteredUsers(users)} className={styles.chat__listOption}>All</div>
                         </div>
+                        {filteredUsers.length >= 1 && filteredUsers.filter(el => el.id !== user.id).map((user) => (
+                            <div onClick={() => handleMessage(user)}
+                                 className={activeReceiver === user ? styles.chat__listItemActive : styles.chat__listItem}
+                                 key={user.id}>{user.username}</div>
+                        ))}
+                        <input placeholder='Search user' className={styles.chat__searchInput}
+                               onChange={(e) => searchItems(e.target.value)}/>
+                    </div>
                 </div>
             </main>
         </div>
