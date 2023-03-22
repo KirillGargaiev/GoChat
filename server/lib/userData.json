@@ -40,5 +40,11 @@
     "username": "black_dog",
     "img": "avatar1",
     "online": false
+  },
+  {
+    "id": "06f60dbb-3c5c-48b1-b6c0-7d0928ed5c46",
+    "username": "orange_lion",
+    "img": "avatar3",
+    "online": false
   }
 ]

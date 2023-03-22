@@ -193,5 +193,35 @@
       "img": "avatar1",
       "online": true
     }
+  },
+  {
+    "messageText": "ku",
+    "receiver": {
+      "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+      "username": "gray_lion",
+      "img": "avatar2",
+      "online": true
+    },
+    "sender": {
+      "id": "06f60dbb-3c5c-48b1-b6c0-7d0928ed5c46",
+      "username": "orange_lion",
+      "img": "avatar3",
+      "online": true
+    }
+  },
+  {
+    "messageText": "hello",
+    "receiver": {
+      "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+      "username": "gray_lion",
+      "img": "avatar2",
+      "online": true
+    },
+    "sender": {
+      "id": "06f60dbb-3c5c-48b1-b6c0-7d0928ed5c46",
+      "username": "orange_lion",
+      "img": "avatar3",
+      "online": true
+    }
   }
 ]

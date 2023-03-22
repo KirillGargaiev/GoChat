@@ -32,11 +32,11 @@ const onConnection = (socket) => {
             (el.sender.id === curUsr.id || el.sender.id === receiver.id) &&
             (el.receiver.id === receiver.id || el.receiver.id === curUsr.id)
         );
-        socket.emit('message:loaded', {messages:privateMessages, sender:curUsr, receiver: receiver})
+        socket.local.emit('message:loaded', {messages:privateMessages, sender:curUsr, receiver: receiver})
     }
 
     const onUserConnected = (list) => {
-        socket.emit('users', list)
+        socket.local.emit('users', list)
         }
 
     socket.on('message:load', onLoadMessages)
