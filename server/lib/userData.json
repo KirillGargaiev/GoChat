@@ -52,5 +52,11 @@
     "username": "yellow_horse",
     "img": "avatar3",
     "online": false
+  },
+  {
+    "id": "0388a96d-11ad-4a7e-bfd0-6e2a868277ea",
+    "username": "red_tiger",
+    "img": "avatar2",
+    "online": false
   }
 ]

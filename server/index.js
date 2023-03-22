@@ -85,6 +85,7 @@ const onConnection = (socket) => {
             if (err) throw err;
         })
         console.log('User disconnected')
+        onUserConnected(userList)
         socket.leave(id)
     })
 }
