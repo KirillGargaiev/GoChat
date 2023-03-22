@@ -1,0 +1,26 @@
+{
+  "name": "gochat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "npm run dev --prefix server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KirillGargaiev/GoChat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KirillGargaiev/GoChat/issues"
+  },
+  "homepage": "https://github.com/KirillGargaiev/GoChat#readme",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}

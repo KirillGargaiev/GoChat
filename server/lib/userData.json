@@ -46,5 +46,11 @@
     "username": "orange_lion",
     "img": "avatar3",
     "online": false
+  },
+  {
+    "id": "d477db0f-9a2c-457a-bdcd-498cb5beb672",
+    "username": "yellow_horse",
+    "img": "avatar3",
+    "online": false
   }
 ]
