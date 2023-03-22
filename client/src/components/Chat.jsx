@@ -84,13 +84,15 @@ const Chat = ({socket, user}) => {
                             </div>
                             <div onClick={() => setFilteredUsers(users)} className={styles.chat__listOption}>All</div>
                         </div>
-                        {filteredUsers.length >= 1 && filteredUsers.filter(el => el.id !== user.id).map((user) => (
-                            <div onClick={() => handleMessage(user)}
-                                 className={activeReceiver === user ? styles.chat__listItemActive : styles.chat__listItem}
-                                 key={user.id}>{user.username}</div>
-                        ))}
-                        <input placeholder='Search user' className={styles.chat__searchInput}
-                               onChange={(e) => searchItems(e.target.value)}/>
+                        <div>
+                            {filteredUsers.length >= 1 && filteredUsers.filter(el => el.id !== user.id).map((user) => (
+                                <div onClick={() => handleMessage(user)}
+                                     className={activeReceiver === user ? styles.chat__listItemActive : styles.chat__listItem}
+                                     key={user.id}>{user.username}</div>
+                            ))}
+                        </div>
+                        <div className={styles.chat__searchInputField}><input className={styles.chat__searchInput} placeholder='Search user'
+                               onChange={(e) => searchItems(e.target.value)}/></div>
                     </div>
                 </div>
             </main>

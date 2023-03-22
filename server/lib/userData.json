@@ -1,5 +1,21 @@
 [
   {
+    "username": "Echo Bot",
+    "online": true
+  },
+  {
+    "username": "Reverse Bot",
+    "online": true
+  },
+  {
+    "username": "Spam Bot",
+    "online": true
+  },
+  {
+    "username": "Ignore Bot",
+    "online": true
+  },
+  {
     "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
     "username": "gray_lion",
     "img": "avatar2",
@@ -39,24 +55,6 @@
     "id": "a299b5b6-e0b8-4629-b97a-2749c3785e26",
     "username": "black_dog",
     "img": "avatar1",
-    "online": false
-  },
-  {
-    "id": "06f60dbb-3c5c-48b1-b6c0-7d0928ed5c46",
-    "username": "orange_lion",
-    "img": "avatar3",
-    "online": false
-  },
-  {
-    "id": "d477db0f-9a2c-457a-bdcd-498cb5beb672",
-    "username": "yellow_horse",
-    "img": "avatar3",
-    "online": false
-  },
-  {
-    "id": "0388a96d-11ad-4a7e-bfd0-6e2a868277ea",
-    "username": "red_tiger",
-    "img": "avatar2",
     "online": false
   }
 ]

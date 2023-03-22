@@ -84,6 +84,7 @@
     margin: 20px 0 10px 0;
     height: 5%;
     display: block;
+    text-align: center;
 }
 
 .chat__listItem:hover {
@@ -91,9 +92,9 @@
 }
 
 .chat__listItemActive {
-    margin: 20px 0 10px 0;
+    margin: 20px auto;
     height: 5%;
-    width: 50%;
+    width: 60%;
     text-align: center;
     padding-top: 8px;
     background-color: grey;
@@ -176,15 +177,19 @@
     font-size: 12px;
 }
 
-.chat__searchInput {
+.chat__searchInputField {
     height: 4%;
-    width: 70%;
-    overflow: auto;
-    border-radius: 16px;
-    border: 0;
-    background-color: #D3D3D3;
-    font-size: 12px;
     padding-left: 5px;
     margin-top: auto;
     margin-bottom: 10px;
 }
+
+.chat__searchInput{
+    background-color: #D3D3D3;
+    font-size: 12px;
+    border-radius: 16px;
+    border: 0;
+
+}::placeholder{
+    text-align: center;
+ }
