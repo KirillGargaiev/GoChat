@@ -4,6 +4,7 @@ const {Server} = require('socket.io')
 const cors = require('cors')
 const fs = require('fs')
 const app = express()
+const {echoBot, reverseBot, ignoreBot, spamBot} = require('./bots')
 
 app.use(cors({origin: "*"}))
 
@@ -16,13 +17,13 @@ const io = new Server(server, {
 let curUsr = {}
 let userList = []
 
-
 const onConnection = (socket) => {
     console.log('User connected')
     const {id} = socket.handshake.query
 
     socket.id = id
     socket.join(id)
+
 
     const onLoadMessages = (receiver) => {
         const messagesCluster = fs.readFileSync('./lib/messageData.json', 'utf-8')
@@ -57,15 +58,14 @@ const onConnection = (socket) => {
     socket.on('authUser', (user) => {
         userList = JSON.parse(fs.readFileSync('./lib/userData.json', 'utf-8'))
         curUsr = user
-        const isUserInList = userList.some(u => u.id === curUsr.id)
-        if (!isUserInList) {
-            userList.push(curUsr)
+        const index = userList.findIndex(el => el.id === curUsr.id)
+        if (index !== -1) {
+            userList[index].online = true
             fs.writeFile('./lib/userData.json', JSON.stringify(userList, null, 2), err => {
                 if (err) throw err;
             })
-        } else {
-            const index = userList.findIndex(el => el.id === curUsr.id)
-            userList[index].online = true
+            } else {
+            userList.push(curUsr)
             fs.writeFile('./lib/userData.json', JSON.stringify(userList, null, 2), err => {
                 if (err) throw err;
             })

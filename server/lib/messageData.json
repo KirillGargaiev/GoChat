@@ -178,5 +178,20 @@
       "img": "avatar2",
       "online": true
     }
+  },
+  {
+    "messageText": "ki",
+    "receiver": {
+      "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+      "username": "gray_lion",
+      "img": "avatar2",
+      "online": true
+    },
+    "sender": {
+      "id": "a299b5b6-e0b8-4629-b97a-2749c3785e26",
+      "username": "black_dog",
+      "img": "avatar1",
+      "online": true
+    }
   }
 ]
