@@ -44,17 +44,5 @@
     "username": "pink_dog",
     "img": "avatar2",
     "online": false
-  },
-  {
-    "id": "63558c3e-72ab-44f4-bfe9-d6ac35055e74",
-    "username": "red_fish",
-    "img": "avatar3",
-    "online": false
-  },
-  {
-    "id": "a299b5b6-e0b8-4629-b97a-2749c3785e26",
-    "username": "black_dog",
-    "img": "avatar1",
-    "online": false
   }
 ]

@@ -84,7 +84,7 @@ const Chat = ({socket, user}) => {
                             </div>
                             <div onClick={() => setFilteredUsers(users)} className={styles.chat__listOption}>All</div>
                         </div>
-                        <div>
+                        <div className={styles.chat__listWrap}>
                             {filteredUsers.length >= 1 && filteredUsers.filter(el => el.id !== user.id).map((user) => (
                                 <div onClick={() => handleMessage(user)}
                                      className={activeReceiver === user ? styles.chat__listItemActive : styles.chat__listItem}

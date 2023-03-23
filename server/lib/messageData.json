@@ -223,5 +223,35 @@
       "img": "avatar3",
       "online": true
     }
+  },
+  {
+    "messageText": "Privet grey_lion",
+    "receiver": {
+      "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+      "username": "gray_lion",
+      "img": "avatar2",
+      "online": true
+    },
+    "sender": {
+      "id": "1403f59b-c0fc-43ee-8e7d-e8e8bde6f4d4",
+      "username": "red_bear",
+      "img": "avatar1",
+      "online": true
+    }
+  },
+  {
+    "messageText": "Priveeeeeeet",
+    "receiver": {
+      "id": "1403f59b-c0fc-43ee-8e7d-e8e8bde6f4d4",
+      "username": "red_bear",
+      "img": "avatar1",
+      "online": false
+    },
+    "sender": {
+      "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
+      "username": "gray_lion",
+      "img": "avatar2",
+      "online": true
+    }
   }
 ]

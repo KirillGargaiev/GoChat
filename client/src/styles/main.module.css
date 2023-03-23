@@ -80,6 +80,11 @@
     background-color: green;
 }
 
+.chat__listWrap{
+    width: 100%;
+    overflow: scroll;
+}
+
 .chat__listItem {
     margin: 20px 0 10px 0;
     height: 5%;
