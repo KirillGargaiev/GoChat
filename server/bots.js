@@ -1,58 +1,73 @@
 class Bot {
-    constructor(name) {
-        this.name = name
+    constructor(type) {
+        this.type = type;
     }
-    answer(req){
+
+    answer(req = null) {
 
     }
 }
-class echoBot extends Bot {
-    constructor(name) {
-        super(name);
+
+class EchoBot extends Bot {
+    constructor(type) {
+        super(type);
     }
+
     answer(req) {
-        super.answer(req);
         return req
     }
 }
 
-class reverseBot extends Bot {
-    constructor(name) {
-        super(name);
+class ReverseBot extends Bot {
+    constructor(type) {
+        super(type);
     }
 
     answer(req) {
-        super.answer(req);
-        setTimeout(()=>{
+        setTimeout(() => {
             return req.split('').reverse().join('')
         }, 3000)
     }
 }
 
-class spamBot extends Bot {
-    constructor(name) {
-        super(name);
+class SpamBot extends Bot {
+    constructor(type) {
+        super(type);
     }
-    answer(req) {
+
+    answer(receiver, req = null) {
+        const message = this.getRandomString();
+        return {messageText: message, sender: `${this.type} Bot`, receiver: receiver}
+    }
+
+}
+
+class IgnoreBot extends Bot {
+    constructor(type) {
+        super(type);
+    }
+
+    answer(req = null) {
         super.answer(req);
-        setInterval(()=>{
-            return `${(Math.random() + 1).toString(36).substring(7)}`
-        }, getRandomInt(10, 120)*1000)
     }
 }
 
-class ignoreBot extends Bot {
-    constructor(name) {
-        super(name);
+function generateRandomString(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    const charactersLength = characters.length;
+
+    for ( let i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-    answer(req) {
-        super.answer(req);
-    }
+
+    return result;
 }
 
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min);
+module.exports = {
+    EchoBot,
+    ReverseBot,
+    SpamBot,
+    IgnoreBot,
+    generateRandomString
 }
-

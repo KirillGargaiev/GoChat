@@ -4,7 +4,8 @@ const {Server} = require('socket.io')
 const cors = require('cors')
 const fs = require('fs')
 const app = express()
-const {echoBot, reverseBot, ignoreBot, spamBot} = require('./bots')
+const {EchoBot, ReverseBot, SpamBot, IgnoreBot, generateRandomString} = require('./bots')
+
 
 app.use(cors({origin: "*"}))
 
@@ -17,7 +18,11 @@ const io = new Server(server, {
 let curUsr = {}
 let userList = []
 
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+}
 const onConnection = (socket) => {
+
     console.log('User connected')
     const {id} = socket.handshake.query
 
@@ -32,32 +37,49 @@ const onConnection = (socket) => {
             (el.sender.id === curUsr.id || el.sender.id === receiver.id) &&
             (el.receiver.id === receiver.id || el.receiver.id === curUsr.id)
         );
-        socket.local.emit('message:loaded', {messages:privateMessages, sender:curUsr, receiver: receiver})
+        io.emit('message:loaded', {messages:privateMessages, user:curUsr, receiver: receiver})
     }
 
     const onUserConnected = (list) => {
-        socket.local.emit('users', list)
+        io.emit('users', list)
         }
 
     socket.on('message:load', onLoadMessages)
 
+
     socket.on('message:send', (data) => {
-        const newMessage = {
-            messageText: data.message,
-            receiver: data.receiver,
-            sender: curUsr
+        console.log(data)
+        let newMessage = {}
+        if(!data.sender){
+            newMessage = {
+                messageText: data.message,
+                receiver: data.receiver,
+                sender: curUsr
+            }
+        } else {
+            newMessage = {
+                messageText: data.message,
+                sender: data.sender,
+                receiver: data.receiver
+            }
+
         }
         const messages = JSON.parse(fs.readFileSync('./lib/messageData.json', 'utf-8'))
         messages.push(newMessage)
         fs.writeFileSync('./lib/messageData.json', JSON.stringify(messages, null, 2), (err) => {
             if (err) throw err;
         })
-        onLoadMessages(data.receiver)
+        if (!data.sender){
+            onLoadMessages(data.receiver)
+        } else {
+            onLoadMessages(data.sender)
+        }
     })
 
     socket.on('authUser', (user) => {
         userList = JSON.parse(fs.readFileSync('./lib/userData.json', 'utf-8'))
         curUsr = user
+        socket.emit('logged', user)
         const index = userList.findIndex(el => el.id === curUsr.id)
         if (index !== -1) {
             userList[index].online = true

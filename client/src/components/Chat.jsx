@@ -18,16 +18,48 @@ const Chat = ({socket, user}) => {
             setUsers(users)
             setFilteredUsers(users)
         })
+        socket.on('logged', (user) => {
+            setCurrentUser(user)
+        })
         socket.on('message:loaded', (data) => {
-            setMessages(data.messages)
-            setCurrentUser(data.sender)
+            if (data.messages[0].sender.id === data.receiver.id || data.messages[0].receiver.id === data.receiver.id) {
+                setMessages(data.messages)
+            }
         })
     }, [socket])
 
+    function generateRandomString(length) {
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        const charactersLength = characters.length;
+
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+
+        return result;
+    }
+
+    function getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
     function sendMessage(data) {
         if (!data.trim()) return;
-        socket.emit('message:send', {message: data.trim(), receiver: activeReceiver})
-        setMessage('')
+        if (activeReceiver.id === "Echo Bot") {
+            socket.emit('message:send', {message: data.trim(), receiver: activeReceiver})
+            socket.emit('message:send', {message: data.trim(), receiver: currentUser, sender: activeReceiver})
+            setMessage('')
+        } else if (activeReceiver.id === "Reverse Bot") {
+            socket.emit('message:send', {message: data.trim(), receiver: activeReceiver})
+            setTimeout(()=>{
+                socket.emit('message:send', {message: data.trim().split('').reverse().join(''), receiver: currentUser, sender: activeReceiver})
+            }, 3000)
+            setMessage('')
+        } else {
+            socket.emit('message:send', {message: data.trim(), receiver: activeReceiver})
+            setMessage('')
+        }
     }
 
     const searchItems = (searchValue) => {
@@ -37,6 +69,14 @@ const Chat = ({socket, user}) => {
 
     function handleMessage(user) {
         setActiveReceiver(user)
+        const spamBot = users.filter(el => el.id === "Spam Bot")[0]
+        // setInterval(() => {
+        //     socket.emit('message:send', {
+        //         message: generateRandomString(8),
+        //         receiver: currentUser,
+        //         sender: spamBot
+        //     })
+        // }, getRandomArbitrary(10, 15) * 1000)
         socket.emit('message:load', user)
     }
 
@@ -91,8 +131,10 @@ const Chat = ({socket, user}) => {
                                      key={user.id}>{user.username}</div>
                             ))}
                         </div>
-                        <div className={styles.chat__searchInputField}><input className={styles.chat__searchInput} placeholder='Search user'
-                               onChange={(e) => searchItems(e.target.value)}/></div>
+                        <div className={styles.chat__searchInputField}><input className={styles.chat__searchInput}
+                                                                              placeholder='Search user'
+                                                                              onChange={(e) => searchItems(e.target.value)}/>
+                        </div>
                     </div>
                 </div>
             </main>

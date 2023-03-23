@@ -1,19 +1,23 @@
 [
   {
     "username": "Echo Bot",
-    "online": true
+    "online": true,
+    "id": "Echo Bot"
   },
   {
     "username": "Reverse Bot",
-    "online": true
+    "online": true,
+    "id": "Reverse Bot"
   },
   {
     "username": "Spam Bot",
-    "online": true
+    "online": true,
+    "id": "Spam Bot"
   },
   {
     "username": "Ignore Bot",
-    "online": true
+    "online": true,
+    "id": "Ignore Bot"
   },
   {
     "id": "4b6ee714-00ff-4ae0-be46-04f7427aea4f",
