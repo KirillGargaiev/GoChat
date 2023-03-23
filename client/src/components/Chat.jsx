@@ -77,7 +77,7 @@ const Chat = ({socket, user}) => {
                 receiver: currentUser,
                 sender: spamBot
             })
-        }, getRandomArbitrary(10, 15) * 1000)
+        }, getRandomArbitrary(10, 120) * 1000)
         socket.emit('message:load', user)
     }
 

@@ -19,9 +19,6 @@ let curUsr = {}
 let curReceiver = {}
 let userList = []
 
-function getRandomArbitrary(min, max) {
-    return Math.random() * (max - min) + min;
-}
 const onConnection = (socket) => {
 
     console.log('User connected')
