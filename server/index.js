@@ -16,6 +16,7 @@ const io = new Server(server, {
     }
 })
 let curUsr = {}
+let curReceiver = {}
 let userList = []
 
 function getRandomArbitrary(min, max) {
@@ -30,14 +31,14 @@ const onConnection = (socket) => {
     socket.join(id)
 
 
-    const onLoadMessages = (receiver) => {
+    const onLoadMessages = () => {
         const messagesCluster = fs.readFileSync('./lib/messageData.json', 'utf-8')
         const messages = JSON.parse(messagesCluster)
         const privateMessages = messages.filter(el =>
-            (el.sender.id === curUsr.id || el.sender.id === receiver.id) &&
-            (el.receiver.id === receiver.id || el.receiver.id === curUsr.id)
+            (el.sender.id === curUsr.id || el.sender.id === curReceiver.id) &&
+            (el.receiver.id === curReceiver.id || el.receiver.id === curUsr.id)
         );
-        io.emit('message:loaded', {messages:privateMessages, user:curUsr, receiver: receiver})
+        io.emit('message:loaded', {messages:privateMessages, user:curUsr, receiver: curReceiver})
     }
 
     const onUserConnected = (list) => {
@@ -46,6 +47,7 @@ const onConnection = (socket) => {
 
     socket.on('message:load', onLoadMessages)
 
+    socket.on('setCurrentReceiver', (user)=>{curReceiver = user})
 
     socket.on('message:send', (data) => {
         console.log(data)
@@ -70,9 +72,9 @@ const onConnection = (socket) => {
             if (err) throw err;
         })
         if (!data.sender){
-            onLoadMessages(data.receiver)
+            onLoadMessages()
         } else {
-            onLoadMessages(data.sender)
+            onLoadMessages()
         }
     })
 

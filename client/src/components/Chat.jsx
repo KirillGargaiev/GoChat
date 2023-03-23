@@ -69,14 +69,15 @@ const Chat = ({socket, user}) => {
 
     function handleMessage(user) {
         setActiveReceiver(user)
+        socket.emit('setCurrentReceiver', user)
         const spamBot = users.filter(el => el.id === "Spam Bot")[0]
-        // setInterval(() => {
-        //     socket.emit('message:send', {
-        //         message: generateRandomString(8),
-        //         receiver: currentUser,
-        //         sender: spamBot
-        //     })
-        // }, getRandomArbitrary(10, 15) * 1000)
+        setInterval(() => {
+            socket.emit('message:send', {
+                message: generateRandomString(8),
+                receiver: currentUser,
+                sender: spamBot
+            })
+        }, getRandomArbitrary(10, 15) * 1000)
         socket.emit('message:load', user)
     }
 
