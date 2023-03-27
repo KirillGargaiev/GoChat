@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
-import Chat from "./Chat";
 import {io} from 'socket.io-client';
 import WebFont from "webfontloader";
-import {checkUser} from "../utils/service";
-
+import {getUser} from "../utils/service";
+// components
+import Chat from "./Chat";
 
 const App = () => {
     const [socket, setSocket] = React.useState(null)
@@ -21,15 +21,19 @@ const App = () => {
             reconnectionDelay: 3000,
             reconnectionAttempts: 20,
         })
-        const _user = checkUser()
-        newSocket.emit('authUser', _user)
+        const _user = getUser()
         setSocket(newSocket)
         setUser(_user)
+        //waiting for socket listeners
+        const timeout = setTimeout(() => {
+            newSocket.emit('authUser', _user)
+            clearTimeout(timeout)
+        }, 100)
     }, [])
     if (!user) return null
     return (
         <div>
-            <Chat socket={socket} user={user} />
+            <Chat socket={socket} user={user}/>
         </div>
     );
 };

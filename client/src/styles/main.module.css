@@ -15,7 +15,7 @@
 .header__title {
     padding-left: 3.2%;
     padding-top: 2.5%;
-    font-size: 32px;
+    font-size: 4vh;
     font-weight: bold;
     font-family: 'Poppins', sans-serif;
 }
@@ -64,7 +64,7 @@
 
 
 .chat__listOption {
-    font-size: 20px;
+    font-size: 2vh;
     width: 50%;
     text-align: center;
     font-family: 'Poppins', sans-serif;
@@ -80,16 +80,19 @@
     background-color: green;
 }
 
-.chat__listWrap{
+.chat__listWrap {
     width: 100%;
     overflow: scroll;
 }
 
 .chat__listItem {
     margin: 20px 0 10px 0;
+    padding-bottom: 1vh;
     height: 5%;
-    display: block;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vh;
 }
 
 .chat__listItem:hover {
@@ -100,11 +103,14 @@
     margin: 20px auto;
     height: 5%;
     width: 60%;
-    text-align: center;
+    padding-bottom: 1vh;
+    justify-content: center;
+    align-items: center;
     padding-top: 8px;
     background-color: grey;
     border-radius: 16px;
-    display: block;
+    font-size: 2vh;
+    display: flex;
 
 }
 
@@ -125,8 +131,10 @@
 }
 
 .chat__messageSender {
+    display: flex;
+    align-items: center;
     width: 30%;
-    font-size: 10px;
+    font-size: 1.6vh;
     height: 8%;
     border-radius: 12px;
     background-color: aquamarine;
@@ -137,8 +145,9 @@
 .chat__messageReceiver {
     width: 30%;
     display: flex;
+    align-items: center;
     margin-left: auto;
-    font-size: 10px;
+    font-size: 1.6vh;
     height: 8%;
     border-radius: 12px;
     background-color: chartreuse;
@@ -161,13 +170,14 @@
     border-radius: 16px;
     border: 0;
     background-color: #D3D3D3;
-    font-size: 20px;
+    font-size: 2vh;
     padding-left: 5px;
 }
 
 .chat__inputButton {
     width: 10%;
-    height: 40px;
+    height: 5vh;
+    font-size: 2vh;
 }
 
 .chat__img {
@@ -179,7 +189,7 @@
 .chat__description {
     margin-left: 20px;
     font-family: 'Open Sans', sans-serif;
-    font-size: 12px;
+    font-size: 1.8vh;
 }
 
 .chat__searchInputField {
@@ -189,12 +199,14 @@
     margin-bottom: 10px;
 }
 
-.chat__searchInput{
+.chat__searchInput {
     background-color: #D3D3D3;
-    font-size: 12px;
+    font-size: 1.8vh;
     border-radius: 16px;
     border: 0;
+    width: 12vw;
+}
 
-}::placeholder{
+::placeholder {
     text-align: center;
- }
+}

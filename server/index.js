@@ -35,7 +35,7 @@ const onConnection = (socket) => {
             (el.sender.id === curUsr.id || el.sender.id === curReceiver.id) &&
             (el.receiver.id === curReceiver.id || el.receiver.id === curUsr.id)
         );
-        io.emit('message:loaded', {messages:privateMessages, user:curUsr, receiver: curReceiver})
+        socket.local.emit('message:loaded', {messages:privateMessages, user:curUsr, receiver: curReceiver})
     }
 
     const onUserConnected = (list) => {
@@ -78,7 +78,7 @@ const onConnection = (socket) => {
     socket.on('authUser', (user) => {
         userList = JSON.parse(fs.readFileSync('./lib/userData.json', 'utf-8'))
         curUsr = user
-        socket.emit('logged', user)
+        socket.emit('authorized', user)
         const index = userList.findIndex(el => el.id === curUsr.id)
         if (index !== -1) {
             userList[index].online = true

@@ -4,27 +4,29 @@ import images from '../images'
 
 const Chat = ({socket, user}) => {
 
-    const [currentUser, setCurrentUser] = useState(null)
+    const [currentUser, setCurrentUser] = useState(user)
     const [activeReceiver, setActiveReceiver] = useState(null)
     const [messages, setMessages] = useState([])
     const [message, setMessage] = useState('')
-    const [users, setUsers] = useState(user)
-    const [filteredUsers, setFilteredUsers] = useState('')
+    const [users, setUsers] = useState([])
+    const [filteredUsers, setFilteredUsers] = useState([])
     const [searchValue, setSearchInput] = useState('')
 
+    const searchItems = (searchValue, newUsers) => {
+        setSearchInput(searchValue)
+        setFilteredUsers((newUsers || users).filter(item => Object.values(item).join('').toLowerCase().includes(searchValue)))
+    }
 
     useEffect(() => {
         socket.on('users', (users) => {
             setUsers(users)
-            setFilteredUsers(users)
+            searchItems(searchValue, users)
         })
-        socket.on('logged', (user) => {
+        socket.on('authorized', (user) => {
             setCurrentUser(user)
         })
         socket.on('message:loaded', (data) => {
-            if (data.messages[0].sender.id === data.receiver.id || data.messages[0].receiver.id === data.receiver.id) {
-                setMessages(data.messages)
-            }
+            setMessages(data.messages)
         })
     }, [socket])
 
@@ -46,25 +48,23 @@ const Chat = ({socket, user}) => {
 
     function sendMessage(data) {
         if (!data.trim()) return;
-        if (activeReceiver.id === "Echo Bot") {
-            socket.emit('message:send', {message: data.trim(), receiver: activeReceiver})
-            socket.emit('message:send', {message: data.trim(), receiver: currentUser, sender: activeReceiver})
-            setMessage('')
-        } else if (activeReceiver.id === "Reverse Bot") {
-            socket.emit('message:send', {message: data.trim(), receiver: activeReceiver})
-            setTimeout(()=>{
-                socket.emit('message:send', {message: data.trim().split('').reverse().join(''), receiver: currentUser, sender: activeReceiver})
-            }, 3000)
-            setMessage('')
-        } else {
-            socket.emit('message:send', {message: data.trim(), receiver: activeReceiver})
-            setMessage('')
+        switch (activeReceiver.id){
+            case "Echo Bot":
+                socket.emit('message:send', {message: data.trim(), receiver: activeReceiver})
+                socket.emit('message:send', {message: data.trim(), receiver: currentUser, sender: activeReceiver})
+                setMessage('')
+                break;
+            case "Reverse Bot":
+                socket.emit('message:send', {message: data.trim(), receiver: activeReceiver})
+                setTimeout(()=>{
+                    socket.emit('message:send', {message: data.trim().split('').reverse().join(''), receiver: currentUser, sender: activeReceiver})
+                }, 3000)
+                setMessage('')
+                break;
+            default:
+                socket.emit('message:send', {message: data.trim(), receiver: activeReceiver})
+                setMessage('')
         }
-    }
-
-    const searchItems = (searchValue) => {
-        setSearchInput(searchValue)
-        setFilteredUsers(users.filter(item => Object.values(item).join('').toLowerCase().includes(searchValue)))
     }
 
     function handleMessage(user) {
@@ -134,7 +134,7 @@ const Chat = ({socket, user}) => {
                         </div>
                         <div className={styles.chat__searchInputField}><input className={styles.chat__searchInput}
                                                                               placeholder='Search user'
-                                                                              onChange={(e) => searchItems(e.target.value)}/>
+                                                                              onChange={(e) => searchItems(e.target.value)} />
                         </div>
                     </div>
                 </div>

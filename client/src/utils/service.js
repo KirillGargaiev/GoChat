@@ -15,7 +15,7 @@ function getRandomAvatar() {
     return `avatar${randomNumber}`;
 }
 
-function checkUser() {
+function getUser() {
     const curUsr = JSON.parse(window.localStorage.getItem('user'))
     if (!curUsr) {
         const newUser = {
@@ -30,4 +30,4 @@ function checkUser() {
     return curUsr;
 }
 
-export {generateUsername, getRandomAvatar, checkUser}
+export {generateUsername, getRandomAvatar, getUser}
